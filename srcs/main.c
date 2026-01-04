@@ -38,7 +38,7 @@ t_data	*init_data(t_data *data, char *s)
 			data->text = byte_format(str);
 		free(str);
 		data->nb_trigrams = (ft_strlen(data->text) >> 1) - 2;
-		return (NULL);									//Breakpoint
+		// return (NULL);									//Breakpoint
 	}
 	else
 	{
@@ -84,6 +84,19 @@ int rmv_empty_node(void *content, void *ref, size_t size)
 	return (1);
 }
 
+t_list *format_list(t_list **list)
+{
+	t_list *curr;
+
+	curr = *list;
+	while (curr)
+	{
+		((t_data_node *)curr->content)->trigram = ft_str_insert(extract_data_node(curr->content, TRIGRAM), "0x", 2);
+		curr = curr->next;
+	}
+	return *list;
+}
+
 int main(int argc, char **argv)
 {
 	t_data data;
@@ -120,7 +133,7 @@ int main(int argc, char **argv)
 	if (!head)
 		return (free(data.text), 1);
 	data.head = &head;
-	(*(data.head))->next = start_list(&data);
+	(*(data.head))->next = start_list();
 	data.list = &((*(data.head))->next);
 	if (!data.list)
 		return free(data.text), destroy_list(&head), 1;
@@ -131,6 +144,10 @@ int main(int argc, char **argv)
 		*data.list = lst_merge_sort(*data.list, &compare_node_crescent);
 	else
 		*data.list = lst_merge_sort(*data.list, &compare_node_decrescent);
+	if (data.bytes)
+	{
+		*data.list = format_list(data.list);
+	}
 
 	if (!data.config)
 		print_list(data.head, data.disp_pos);

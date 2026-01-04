@@ -21,6 +21,8 @@ int read_config(FILE *f, t_data *data, t_uint v)
 	data->bytes = get_bit(value, 2);
 	data->hex = get_bit(value, 3);
 	data->n_grams = get_bits(value, 4, 7);
+	if (data->bytes)
+		data->n_grams *= 2;
 	data->max_threads = get_bits(value, 11, 5);
 
 	return (1);

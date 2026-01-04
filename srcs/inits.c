@@ -9,7 +9,7 @@ t_list *init_head(t_data *d)
 		return (NULL);
 	data->nb_threads = &d->nb_threads;
 	data->size_sample = ft_strlen(d->text);
-	data->nb_trigrams = data->size_sample - 2;
+	data->nb_trigrams = d->nb_trigrams;
 
 	return (ft_lstnew(data));
 }

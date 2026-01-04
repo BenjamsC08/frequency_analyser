@@ -128,7 +128,6 @@ char	*byte_format(char *str)
 	while (*str)
 	{
 		tmp = ft_xtoa((t_ulong)*str, MIN_HEX);
-		ft_dprintf(2, "%s%s%s\n", RED, tmp, RESET);
 		out = ft_strfjoin(out, tmp);
 		free (tmp);
 		if (!out)
