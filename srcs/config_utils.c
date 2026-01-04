@@ -25,6 +25,21 @@ int read_config(FILE *f, t_data *data, t_uint v)
 	return (1);
 }
 
+int	add_option(char *str, int low_limit, int high_limit)
+{
+	int tmp = 0;
+
+	while (1)
+	{
+        ft_dprintf(1, "%s\n", str);
+        if (scanf("%d", &tmp) == 1 && tmp >= low_limit && tmp <= high_limit)
+            break;
+        ft_dprintf(1, "something wrong cannot be >= at %d, or <= at %d\n", high_limit, low_limit);
+        while (getchar() != '\n');
+    }
+	return (tmp);
+}
+
 int config_file(t_data *data)
 {
     FILE *f = fopen("config", "r");
@@ -38,52 +53,23 @@ int config_file(t_data *data)
     }
     ft_dprintf(1, "No valid configuration found. Entering interactive setup.\n");
 
-    while (1)
-	{
-        ft_dprintf(1, "Max thread (1-31) [<= nproc]:\n");
-        if (scanf("%d", &tmp) == 1 && tmp >= 1 && tmp <= 31)
-            break;
-        ft_dprintf(1, "Invalid thread count.\n");
-        while (getchar() != '\n');
-    }
+	tmp = add_option("Max thread (1-31) [<= nproc]:", 1, 31);
 	value += tmp << 6;
-    while (1) {
-        ft_dprintf(1, "Size of ngrams (min 2, max INT_MAX):\n");
-        if (scanf("%d", &tmp) == 1 && tmp >= 2 && tmp <= 63)
-            break;
-        ft_dprintf(1, "Invalid size.\n");
-        while (getchar() != '\n');
-    }
+
+	tmp = add_option("Size of ngrams (min 2, max INT_MAX):", 2, 63);
 	value += tmp;
 	value <<= 1;
-    while (1) {
-        ft_dprintf(1, "Only hex format [1/0]:\n");
-        if (scanf("%d", &tmp) == 1 && (tmp == 1 || tmp == 0))
-            break;
-        ft_dprintf(1, "Invalid size.\n");
-        while (getchar() != '\n');
-    }
+
+	tmp = add_option("Only hex input [1/0]:", 0, 1);
 	value += tmp;
 	value <<= 1;
-    while (1) {
-        ft_dprintf(1, "output files ? [1/0]:\n");
-        if (scanf("%d", &tmp) == 1 && (tmp == 1 || tmp == 0))
-            break;
-        ft_dprintf(1, "Invalid size.\n");
-        while (getchar() != '\n');
-    }
+
+	tmp = add_option("output files ? [1/0]:", 0, 1);
 	value += tmp;
 	value <<= 1;
+
 	if (tmp == 0)
-	{
-		while (1) {
-			ft_dprintf(1, "Disp Position of n-gram? [1/0]:\n");
-			if (scanf("%d", &tmp) == 1 && (tmp == 1 || tmp == 0))
-				break;
-			ft_dprintf(1, "Invalid size.\n");
-			while (getchar() != '\n');
-		}
-	}
+		tmp = add_option("Disp Position of n-gram? [1/0]:", 0, 1);
 	value += tmp;
     while (getchar() != '\n');
 
