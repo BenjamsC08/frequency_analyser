@@ -57,7 +57,7 @@ int config_file(t_data *data)
 	value += tmp;
 	value <<= 1;
     while (1) {
-        ft_dprintf(1, "Hex managament (use bytes) [1/0]:\n");
+        ft_dprintf(1, "Only hex format [1/0]:\n");
         if (scanf("%d", &tmp) == 1 && (tmp == 1 || tmp == 0))
             break;
         ft_dprintf(1, "Invalid size.\n");
@@ -77,7 +77,7 @@ int config_file(t_data *data)
 	if (tmp == 0)
 	{
 		while (1) {
-			ft_dprintf(1, "Disp Position ? [1/0]:\n");
+			ft_dprintf(1, "Disp Position of n-gram? [1/0]:\n");
 			if (scanf("%d", &tmp) == 1 && (tmp == 1 || tmp == 0))
 				break;
 			ft_dprintf(1, "Invalid size.\n");

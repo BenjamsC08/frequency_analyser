@@ -28,9 +28,9 @@ char	*reset_hex(char *str)
 	
 	iu = remove_whitespace(str);
 	if (!iu)
-		return (write(1, "2\n", 2), NULL);
+		return (write(1, "alloc error\n", 12), NULL);
 	if (!ft_only_charset(iu, "0123456789abcdefABCDEFxX:;,\\"))
-		return (write(1, "3\n", 2), free(iu), NULL);
+		return (write(1, "config said only hex is accepted\n", 33), free(iu), NULL);
 	out = NULL;
 	if (iu[0] == 'x')
 		out = ft_remove_charset(iu, "x");
@@ -95,7 +95,7 @@ char	*hex_format(char *str, int type)
 
 	out = reset_hex(str);
 	if (!out)
-		return (write(1,"1\n", 2), NULL);
+		return (NULL);
 	ft_lowerise(&out);
 	if (type == ONE_LINE)
 		return (out);
