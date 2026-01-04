@@ -18,7 +18,8 @@ int read_config(FILE *f, t_data *data, t_uint v)
 		return (0);
 	data->disp_pos = get_bit(value, 0); 
 	data->config = get_bit(value, 1);
-	data->hex = get_bit(value, 2);
+	data->bytes = get_bit(value, 2);
+	data->hex = get_bit(value, 3);
 	data->n_grams = get_bits(value, 3, 7);
 	data->max_threads = get_bits(value, 10, 5);
 
@@ -60,7 +61,11 @@ int config_file(t_data *data)
 	value += tmp;
 	value <<= 1;
 
-	tmp = add_option("Only hex input [1/0]:", 0, 1);
+	tmp = add_option("Force entry in hexadecimal ? [1/0]:", 0, 1);
+	value += tmp;
+	value <<= 1;
+
+	tmp = add_option("Bytes management [1/0]:\n(will take 0x41 (or A) instead of taking 0 x 4 1)", 0, 1);
 	value += tmp;
 	value <<= 1;
 

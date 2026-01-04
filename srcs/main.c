@@ -26,7 +26,7 @@ t_data	*init_data(t_data *data, char *s)
 	}
 	else
 		str = s;
-	if (data->hex)
+	if (data->bytes)
 	{
 		data->text = hex_format(str, 0);
 		free(str);
