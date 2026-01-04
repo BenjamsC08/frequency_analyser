@@ -61,7 +61,7 @@ int config_file(t_data *data)
 	value += tmp;
 	value <<= 1;
 
-	tmp = add_option("Force entry in hexadecimal ? [1/0]:", 0, 1);
+	tmp = add_option("Force entry in hexadecimal? [1/0]:\n(using hex without identifier like 0x, \\x, x)", 0, 1);
 	value += tmp;
 	value <<= 1;
 
