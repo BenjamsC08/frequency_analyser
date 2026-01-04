@@ -8,6 +8,7 @@ char		*remove_whitespace(char *str);
 char		*reset_hex(char *str);
 char		*ft_str_insert(char *str, char *to_insert, int step);
 char		*hex_format(char *str, int type);
+char		*byte_format(char *str);
 //	inits.c
 t_list		*init_head(t_data *d);
 t_list		*start_list();

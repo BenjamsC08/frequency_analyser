@@ -20,8 +20,8 @@ int read_config(FILE *f, t_data *data, t_uint v)
 	data->config = get_bit(value, 1);
 	data->bytes = get_bit(value, 2);
 	data->hex = get_bit(value, 3);
-	data->n_grams = get_bits(value, 3, 7);
-	data->max_threads = get_bits(value, 10, 5);
+	data->n_grams = get_bits(value, 4, 7);
+	data->max_threads = get_bits(value, 11, 5);
 
 	return (1);
 }
@@ -61,7 +61,7 @@ int config_file(t_data *data)
 	value += tmp;
 	value <<= 1;
 
-	tmp = add_option("Force entry in hexadecimal? [1/0]:\n(using hex without identifier like 0x, \\x, x)", 0, 1);
+	tmp = add_option("Force to convert each char of the entry in byte? [1/0]:\n(your sample only have hex char 0->f)", 0, 1);
 	value += tmp;
 	value <<= 1;
 

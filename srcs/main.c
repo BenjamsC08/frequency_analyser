@@ -1,4 +1,6 @@
 #include "freq_a.h"
+#include "freqa_def.h"
+#include "libft.h"
 
 char *get_big_string(void) {
     t_uint cap = 256, used = 0;
@@ -19,6 +21,8 @@ char *get_big_string(void) {
 t_data	*init_data(t_data *data, char *s)
 {
 	char *str;
+
+	data->text = NULL;
 	if (!s)
 	{
 		ft_dprintf(1, "Put your string\n");
@@ -28,18 +32,23 @@ t_data	*init_data(t_data *data, char *s)
 		str = s;
 	if (data->bytes)
 	{
-		data->text = hex_format(str, 0);
+		if (!data->hex)
+			data->text = hex_format(str, ONE_LINE);
+		if (!data->text)
+			data->text = byte_format(str);
 		free(str);
+		data->nb_trigrams = (ft_strlen(data->text) >> 1) - 2;
+		return (NULL);									//Breakpoint
 	}
 	else
-		data->text = str;
-	if (!data->text)
 	{
-		return (NULL);
+		data->text = str;
+		data->nb_trigrams = ft_strlen(data->text) - 2;
 	}
+	if (!data->text)
+		return (NULL);
 	data->char_by_thread = CHAR_MIN_BY_THREADS;
 	data->nb_threads = 1;
-	data->nb_trigrams = ft_strlen(data->text) - 2;
 	return (data);
 }
 

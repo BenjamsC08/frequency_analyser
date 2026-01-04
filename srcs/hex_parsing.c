@@ -1,4 +1,5 @@
 #include "freq_a.h"
+#include "libft.h"
 
 char *remove_whitespace(char *str)
 {
@@ -30,7 +31,7 @@ char	*reset_hex(char *str)
 	if (!iu)
 		return (write(1, "alloc error\n", 12), NULL);
 	if (!ft_only_charset(iu, "0123456789abcdefABCDEFxX:;,\\"))
-		return (write(1, "config said only hex is accepted\n", 33), free(iu), NULL);
+		return (write(1, "Not a correct hex format\n", 25), free(iu), NULL);
 	out = NULL;
 	if (iu[0] == 'x')
 		out = ft_remove_charset(iu, "x");
@@ -113,5 +114,26 @@ char	*hex_format(char *str, int type)
 		return (free(s), NULL);
 	if (s != str)
 		return (ft_strfjoin(s, out));
+	return (out);
+}
+
+char	*byte_format(char *str)
+{
+	char	 *out;
+	char	 *tmp;
+
+	out = ft_calloc(2, 1);
+	if (!out)
+		return (NULL);
+	while (*str)
+	{
+		tmp = ft_xtoa((t_ulong)*str, MIN_HEX);
+		ft_dprintf(2, "%s%s%s\n", RED, tmp, RESET);
+		out = ft_strfjoin(out, tmp);
+		free (tmp);
+		if (!out)
+			return (NULL);
+		str++;
+	}
 	return (out);
 }
