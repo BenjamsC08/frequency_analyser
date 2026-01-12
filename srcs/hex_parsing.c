@@ -68,6 +68,7 @@ char	*ft_str_insert(char *str, char *to_insert, int step)
 		out = ft_str_add_char(out, str[k]);
 		k++;
 	}
+	free(str);
 	return (out);
 }
 
