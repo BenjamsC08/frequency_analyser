@@ -30,8 +30,8 @@ char		**split_for_threads(t_data *data);
 void		print_list(t_list **head, t_uint p);
 void		destroy_list(t_list **head);
 //
-int export_list(t_list **head);
-int config_file(t_data *data);
-int read_config(FILE *f, t_data *data, t_uint v);
+int			export_list(t_list **head);
+int			config_file(t_data *data);
+int			read_config(FILE *f, t_data *data, t_uint v);
 
 #endif

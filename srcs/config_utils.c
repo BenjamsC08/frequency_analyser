@@ -25,6 +25,7 @@ int read_config(FILE *f, t_data *data, t_uint v)
 		data->n_grams *= 2;
 	data->max_threads = get_bits(value, 11, 5);
 
+	fclose(f);
 	return (1);
 }
 

@@ -1,6 +1,5 @@
 #include "freq_a.h"
 #include "freqa_def.h"
-#include "libft.h"
 
 char *get_big_string(void) {
     t_uint cap = 256, used = 0;
@@ -25,7 +24,7 @@ t_data	*init_data(t_data *data, char *s)
 	data->text = NULL;
 	if (!s)
 	{
-		ft_dprintf(1, "Put your string\n");
+		ft_dprintf(1, "Put your text\n");
 		str = get_big_string();
 	}
 	else
