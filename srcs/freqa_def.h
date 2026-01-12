@@ -25,7 +25,7 @@
 
 #define DISP 1
 
-#define CHAR_MIN_BY_THREADS 1024
+#define CHAR_MIN_BY_THREADS 512
 
 typedef pthread_mutex_t t_mtx;
 
