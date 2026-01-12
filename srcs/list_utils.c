@@ -122,6 +122,6 @@ void	print_list(t_list **head, t_uint p)
 	ft_dprintf(1, "\n%slength of the sample %d\n%s", CYAN, ((t_data_head *)((*head)->content))->size_sample, RESET);
 	ft_dprintf(1, "%s%d trigrams\n%s", CYAN, max, RESET);
 	ft_dprintf(1, "%s%d threads%s\n", CYAN, *((t_data_head *)((*head)->content))->nb_threads, RESET);
-	ft_dprintf(1, "%s%d nodes%s\n", CYAN, ft_lstsize(*head), RESET);
+	ft_dprintf(1, "%s%d nodes%s\n", CYAN, ft_lstsize((*head)->next), RESET);
 
 }

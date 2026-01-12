@@ -12,7 +12,6 @@ int	add_data_node(t_list *last, char *str, int pos, int size_grams)
 	data->trigram = ft_strndup(str, size_grams);
 	if (!data->trigram)
 		return (free_data_node(data), 0);
-	ft_printf(GREEN"%s:%p\n"RESET, data->trigram, &(data->trigram));
 	data->count = 1;
 	data->pos = ft_calloc(1, sizeof(int));
 	if (!data->pos)
@@ -78,10 +77,7 @@ void	free_data_node(void *ptr_data)
 	if (!data)
 		return ;
 	if (data->trigram)
-	{
-		ft_printf(RED"%s:%p\n"RESET, data->trigram, &(data->trigram));
 		free(data->trigram);
-	}
 	if (data->pos)
 		free(data->pos);
 	if (data->mtx_node)

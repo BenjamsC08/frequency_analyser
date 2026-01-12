@@ -36,8 +36,7 @@ t_data	*init_data(t_data *data, char *s)
 		if (!data->text)
 			data->text = byte_format(str);
 		free(str);
-		data->nb_trigrams = (ft_strlen(data->text) >> 1) - 2;
-		// return (NULL);									//Breakpoint
+		data->nb_trigrams = ft_strlen(data->text) - (data->n_grams-1);
 	}
 	else
 	{
