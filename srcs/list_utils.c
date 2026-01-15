@@ -31,10 +31,10 @@ char	**split_for_threads(t_data *data)
 		data->char_by_thread = l;
 		data->nb_threads = 1;
 	}
-	else if (l / CHAR_MIN_BY_THREADS > data->max_threads)
+	else if (l / CHAR_MIN_BY_THREADS > data->cf.flag.MAX_THREADS)
 	{
-		data->char_by_thread = l / data->max_threads;
-		data->nb_threads = data->max_threads;
+		data->char_by_thread = l / data->cf.flag.MAX_THREADS;
+		data->nb_threads = data->cf.flag.MAX_THREADS;
 	}
 	else
 	{
@@ -58,7 +58,7 @@ char	**split_for_threads(t_data *data)
 			len_to_dup = data->char_by_thread + f;
 		strs[n] = ft_strndup(start_ptr, len_to_dup);
 		n++;
-		f = data->n_grams - 1;
+		f = data->cf.flag.SIZE_NGRAM - 1;
 	}
 	return (strs);
 }

@@ -63,6 +63,6 @@ t_reader *init_data_threads(t_data *data, char *str, int i, t_mtx **mutex)
 		thread->start = 1 + i * thread->length;
 
 	thread->char_by_thread = thread->length;
-	thread->n_grams = data->n_grams;
+	thread->n_grams = data->cf.flag.SIZE_NGRAM;
 	return (thread);
 }

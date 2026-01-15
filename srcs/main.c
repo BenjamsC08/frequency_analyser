@@ -29,14 +29,14 @@ t_data	*init_data(t_data *data, char *s)
 	}
 	else
 		str = s;
-	if (data->bytes)
+	if (data->cf.flag.MANAGE_AS_BYTES)
 	{
-		if (!data->hex)
+		if (!data->cf.flag.FORCE_HEX)
 			data->text = hex_format(str, ONE_LINE);
 		if (!data->text)
 			data->text = byte_format(str);
 		free(str);
-		data->nb_trigrams = ft_strlen(data->text) - (data->n_grams-1);
+		data->nb_trigrams = ft_strlen(data->text) - (data->cf.flag.SIZE_NGRAM-1);
 	}
 	else
 	{
@@ -123,6 +123,7 @@ int main(int argc, char **argv)
 			}
 		}
 	}
+	data.cf.flags = 0;
 	if (!config_file(&data))
 		return (1);
 	if (!init_data(&data, str))
@@ -138,17 +139,17 @@ int main(int argc, char **argv)
 	if (!create_threads(&data))
 		return free(data.text), destroy_list(&head), 1;
 	ft_lstremove_if(data.list, 0, &rmv_empty_node, &free_data_node);
-	if (!data.config)
+	if (!data.cf.flag.CONFIG_FILE)
 		*data.list = lst_merge_sort(*data.list, &compare_node_crescent);
 	else
 		*data.list = lst_merge_sort(*data.list, &compare_node_decrescent);
-	if (data.bytes)
+	if (data.cf.flag.MANAGE_AS_BYTES)
 	{
 		*data.list = format_list(data.list);
 	}
 
-	if (!data.config)
-		print_list(data.head, data.disp_pos);
+	if (!data.cf.flag.CONFIG_FILE)
+		print_list(data.head, data.cf.flag.DISP_POSITION_GRAMS);
 	else
 		export_list(data.head);
 	destroy_list(data.head);

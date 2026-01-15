@@ -1,4 +1,5 @@
 #include "freq_a.h"
+#include "libft.h"
 
 int read_config(FILE *f, t_data *data, t_uint v)
 {
@@ -16,15 +17,14 @@ int read_config(FILE *f, t_data *data, t_uint v)
 		value = v;
 	else
 		return (0);
-	data->disp_pos = get_bit(value, 0); 
-	data->config = get_bit(value, 1);
-	data->bytes = get_bit(value, 2);
-	data->hex = get_bit(value, 3);
-	data->n_grams = get_bits(value, 4, 7);
-	if (data->bytes)
-		data->n_grams *= 2;
-	data->max_threads = get_bits(value, 11, 5);
-
+	data->cf.flag.DISP_POSITION_GRAMS = get_bit(value, 0);
+	data->cf.flag.CONFIG_FILE = get_bit(value, 1);
+	data->cf.flag.MANAGE_AS_BYTES = get_bit(value, 2);
+	data->cf.flag.FORCE_HEX = get_bit(value, 3);
+	data->cf.flag.SIZE_NGRAM = get_bits(value, 4, 7);
+	if (data->cf.flag.MANAGE_AS_BYTES)
+		data->cf.flag.SIZE_NGRAM *= 2;
+	data->cf.flag.MAX_THREADS = get_bits(value, 11, 5);
 	if (f)
 		fclose(f);
 	return (1);
@@ -61,7 +61,7 @@ int config_file(t_data *data)
 	tmp = add_option("Max thread (1-31) [<= nproc]:", 1, 31);
 	value += tmp << 6;
 
-	tmp = add_option("Size of ngrams (min 2, max INT_MAX):", 2, 63);
+	tmp = add_option("Size of ngrams (min 2, max 31):", 2, 31);
 	value += tmp;
 	value <<= 1;
 

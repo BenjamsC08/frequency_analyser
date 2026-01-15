@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <time.h>
 #include <stdio.h>
+#include <stdint.h>
 #include <sys/stat.h>
 
 # define ONE_LINE 0
@@ -29,21 +30,31 @@
 
 typedef pthread_mutex_t t_mtx;
 
+union CONFIG_FLAGS {
+    uint16_t   flags;
+    struct __attribute__((packed))
+        {                                         // Bits  Description
+        uint8_t  DISP_POSITION_GRAMS	  : 1;
+        uint8_t  CONFIG_FILE			  : 1;
+        uint8_t  MANAGE_AS_BYTES		  : 1;
+        uint8_t  FORCE_HEX				  : 1;
+        uint8_t  SIZE_NGRAM				  : 6;
+        uint8_t  MAX_THREADS	          : 5;
+        uint8_t  RESERVED		          : 1;
+        }flag;
+};
+
+
 typedef struct s_data
 {
-	char		*text;
-	int			max_threads;
-	int			char_by_thread;
-	int			nb_threads;
-	pthread_t	*threads;
-	t_list		**head;
-	t_list		**list;
-	t_uint		disp_pos;
-	t_uint		n_grams;
-	t_uint		nb_trigrams;	  //count for all trigram
-	t_bool		config;			  // 0 if only frequency, 1 if another prog call it
-	t_bool		bytes;
-	t_bool		hex;
+	char						*text;
+	int							char_by_thread;
+	int							nb_threads;
+	pthread_t					*threads;
+	t_list						**head;
+	t_list						**list;
+	t_uint						nb_trigrams;	  //count for all trigram
+	volatile union CONFIG_FLAGS	cf;
 }				t_data;
 
 typedef struct s_data_node
@@ -73,6 +84,7 @@ typedef struct s_reader
 	t_uint	start;
 	t_list	**h_list;
 }			t_reader;
+
 
 
 #endif
