@@ -23,7 +23,7 @@ int read_config(FILE *f, t_data *data, t_uint v)
 	data->cf.flag.FORCE_HEX = get_bit(value, 3);
 	data->cf.flag.SIZE_NGRAM = get_bits(value, 4, 7);
 	if (data->cf.flag.MANAGE_AS_BYTES)
-		data->cf.flag.SIZE_NGRAM *= 2;
+		data->cf.flag.SIZE_NGRAM <<= 1;
 	data->cf.flag.MAX_THREADS = get_bits(value, 11, 5);
 	if (f)
 		fclose(f);
