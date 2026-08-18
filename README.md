@@ -1,4 +1,4 @@
-# xor_cracking
+# FA
 
 
-## actually it'sjuste a frquency analiser
+## Actually, it's just a bad frequency analyzer
