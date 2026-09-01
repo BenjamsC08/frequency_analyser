@@ -32,15 +32,15 @@ typedef pthread_mutex_t t_mtx;
 
 union CONFIG_FLAGS {
     uint16_t   flags;
-    struct __attribute__((packed))
+    struct
         {                                         // Bits  Description
-        uint8_t  DISP_POSITION_GRAMS	  : 1;
-        uint8_t  CONFIG_FILE			  : 1;
-        uint8_t  MANAGE_AS_BYTES		  : 1;
-        uint8_t  FORCE_HEX				  : 1;
-        uint8_t  SIZE_NGRAM				  : 6;
-        uint8_t  MAX_THREADS	          : 5;
-        uint8_t  RESERVED		          : 1;
+        uint16_t  DISP_POSITION_GRAMS	  : 1;
+        uint16_t  CONFIG_FILE			  : 1;
+        uint16_t  MANAGE_AS_BYTES		  : 1;
+        uint16_t  FORCE_HEX				  : 1;
+        uint16_t  SIZE_NGRAM			  : 6;
+        uint16_t  MAX_THREADS	          : 5;
+        uint16_t  RESERVED		          : 1;
         }flag;
 };
 

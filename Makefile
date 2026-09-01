@@ -1,11 +1,11 @@
 CC = cc
-FLAGS = -g -Wall -Wextra -Werror
+FLAGS = -g -Wall -Wextra -Werror -pthread -no-pie
 NAME = freq
 SRCS = srcs/data_node_utils.c srcs/export.c srcs/hex_parsing.c srcs/inits.c srcs/multiThread.c srcs/routines.c srcs/list_utils.c srcs/main.c srcs/config_utils.c
 OBJ = $(SRCS:.c=.o)
 LIB_PATH = -L.
 LIB_NAME = -lft
-INCLUDE_PATH = -Ilibft/includes -Iincludes
+INCLUDE_PATH = -Iincludes
 VALID = \033[1;32m
 NOTVALID = \033[1;31m
 LOADING = \033[3;33m
